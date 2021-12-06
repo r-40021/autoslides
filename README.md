@@ -1,5 +1,5 @@
 ![74842491-cb22aa80-532a-11ea-8116-150ef294bd59](https://user-images.githubusercontent.com/12829262/74886021-4d38c080-5377-11ea-8c70-1e03bf4c2231.png)
-
+![Creado con - Google Apps Script](https://img.shields.io/static/v1?label=Creado+con&message=Google+Apps+Script&color=blue&style=for-the-badge&logo=GAS)
 # ¿Qué hay aquí?
 - [¿Qué es AutoSlides?](#qu%C3%A9-es-autoslides)
 - [¿Por qué AutoSlides?](#por-qu%C3%A9-autoslides)

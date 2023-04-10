@@ -103,7 +103,7 @@ Cuando estés listo para publicar tu presentación, haz clic en `🔄 AutoSlides
 
 >  🚨 **¡Atención, las instrucciones de los pasos 2 y 3 ya no son válidas, échale un vistazo a** [**esto**](https://github.com/pfelipm/autoslides/issues/5)**! 🚨**
 
-:bulb:  Al visualizar la webapp en tu navegador, bien directamente, bien incrustada dentro de un sitio web, recuerda que con `TAB` puedes situar el foco sobre la presentación (o hacer clic sobre ella) y con `F11` activar o desactivar la visualización en pantalla completa. La advertencia que inserta Google automáticamente sobre fondo gris en la parte superior de la página desaparecerá.
+Al visualizar la webapp en tu navegador, bien directamente, bien incrustada dentro de un sitio web, recuerda que con `TAB` puedes situar el foco sobre la presentación (o hacer clic sobre ella) y con `F11` activar o desactivar la visualización en pantalla completa. **La advertencia que inserta Google automáticamente sobre fondo gris en la parte superior de la página desaparecerá**.
 
 Si en algún momento deseas que tu presentación deje de ser visible públicamente, solo tienes que hacer `🔄 AutoSlides` ⏩ `🔻 Detener publicación`.
 

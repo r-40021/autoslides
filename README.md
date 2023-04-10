@@ -1,8 +1,5 @@
 ![74842491-cb22aa80-532a-11ea-8116-150ef294bd59](https://user-images.githubusercontent.com/12829262/74886021-4d38c080-5377-11ea-8c70-1e03bf4c2231.png)
 
-  
- 
-
 ![Creado con - Google Apps Script](https://img.shields.io/static/v1?label=Creado+con&message=Google+Apps+Script&color=blue&logo=GAS)
 
 # ¿Qué hay aquí?
@@ -104,7 +101,7 @@ Cuando estés listo para publicar tu presentación, haz clic en `🔄 AutoSlides
 
 ![](https://user-images.githubusercontent.com/12829262/75167570-df4d1a00-5725-11ea-9f87-e9772d9c071c.png)
 
->  :warning: **¡Atención, las instrucciones anteriores ya no son válidas, échale un vistazo a** [**esto**](https://github.com/pfelipm/autoslides/issues/5)**!**
+>  :warning: **¡Atención, las instrucciones de los pasos 2 y 3 ya no son válidas, échale un vistazo a** [**esto**](https://github.com/pfelipm/autoslides/issues/5)**!**
 
 Al reproducir la presentación en tu navegador, recuerda que con `TAB` puedes situar el foco sobre la presentación y con `F11` activar o desactivar la visualización en pantalla completa. :bulb:  Si además haces clic sobre la propia presentación antes de pulsar `F11`, la advertencia que inserta Google automáticamente sobre fondo gris en la parte superior de la paǵina desaparecerá.
 

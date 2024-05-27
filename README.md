@@ -2,6 +2,14 @@
 
 ![Creado con - Google Apps Script](https://img.shields.io/static/v1?label=Creado+con&message=Google+Apps+Script&color=blue&logo=GAS)
 
+# 本家からの変更点
+- UIを日本語化
+- 更新時の画面のちらつきを低減
+- ボトムバーが完全に隠れるように調整
+- スライドが画面中央に表示されるように調整
+- CDNから読み込んでいたプログラムの本体への組み込み
+- Googleスライドの最新のUIに合わせて表現を一部調整
+
 # ¿Qué hay aquí?
 
 *   [¿Qué es AutoSlides?](#qu%C3%A9-es-autoslides)

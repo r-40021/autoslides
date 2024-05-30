@@ -37,7 +37,7 @@ function onOpen() {
 
   SlidesApp.getUi().createMenu('🔄 AutoSlides')
     .addItem('⚙️ 設定', 'configurar')
-    // .addItem('🌐 公開URLを取得', 'publicar')
+    .addItem('🌐 公開URLを取得', 'publicar')
     .addItem('🔻 公開停止', 'despublicar')
     .addSeparator()
     .addItem('💡 AutoSlidesについて', 'acercaDe')
@@ -92,15 +92,15 @@ function configurar() {
 
   // Inicializar y / o leer configuración
 
-  if (PropertiesService.getDocumentProperties().getProperty('initialized') != 'true') {
+  if (PropertiesService.getScriptProperties().getProperty('initialized') != 'true') {
 
     // Establecer ajustes por defecto
 
-    PropertiesService.getDocumentProperties().setProperties(AJUSTES_P, true);
+    PropertiesService.getScriptProperties().setProperties(AJUSTES_P, true);
 
     // Inicialmente la publicación está desactivada
 
-    PropertiesService.getDocumentProperties().setProperty('publicar', 'false');
+    PropertiesService.getScriptProperties().setProperty('publicar', 'false');
 
   }
 
@@ -110,7 +110,7 @@ function configurar() {
 
   // Valores iniciales de controles
 
-  var ajustes = PropertiesService.getDocumentProperties();
+  var ajustes = PropertiesService.getScriptProperties();
 
   panel.sAvanzar = ajustes.getProperty('sAvanzar');
   panel.sRecargar = ajustes.getProperty('sRecargar');
@@ -134,7 +134,7 @@ function ajustesPorDefecto() {
   // Invocado desde panelLateral_js
   // Restablecer ajustes por defecto (,false para preservar otras propiedades)
 
-  PropertiesService.getDocumentProperties().setProperties(AJUSTES_P, false);
+  PropertiesService.getScriptProperties().setProperties(AJUSTES_P, false);
 
   // Devolver a panelLateral_js para que actualice formulario
   return AJUSTES_P;
@@ -147,7 +147,7 @@ function actualizarAjustes(form) {
   // Al devolver form desde cliente, si una casilla de verificación no está marcada,
   // su propiedad (name) en el objeto pasado a servidor no se devuelve (cuidado).
 
-  PropertiesService.getDocumentProperties().setProperties({
+  PropertiesService.getScriptProperties().setProperties({
     'sAvanzar': form.sAvanzar,
     'sRecargar': form.sRecargar,
     'msFundido': form.msFundido,
@@ -193,24 +193,25 @@ function obtenerRevisiones() {
   }
 }
 
-function acortarUrl() {
+// GASからデプロイURLを正確に取得できないため削除
+// function acortarUrl() {
 
-  // Invocado desde infoPublicada
+//   // Invocado desde infoPublicada
 
-  var urlCorto = PropertiesService.getDocumentProperties().getProperty('urlCorto');
+//   var urlCorto = PropertiesService.getScriptProperties().getProperty('urlCorto');
 
-  if (urlCorto == null) {
+//   if (urlCorto == null) {
 
-    // No se ha acortado aún, lo haremos ahora y guardaremos URL corto en propiedades
+//     // No se ha acortado aún, lo haremos ahora y guardaremos URL corto en propiedades
 
-    urlCorto = UrlFetchApp.fetch(TINYURL + ScriptApp.getService().getUrl()).getContentText();
-    PropertiesService.getDocumentProperties().setProperty('urlCorto', urlCorto);
+//     urlCorto = UrlFetchApp.fetch(TINYURL + ScriptApp.getService().getUrl()).getContentText();
+//     PropertiesService.getScriptProperties().setProperty('urlCorto', urlCorto);
 
-  }
+//   }
 
-  return urlCorto;
+//   return urlCorto;
 
-}
+// }
 
 function publicar() {
 
@@ -228,11 +229,11 @@ function publicar() {
     },
       slideId, ultimaRevId);
 
-    PropertiesService.getDocumentProperties().setProperty('publicar', 'true');
+    PropertiesService.getScriptProperties().setProperty('publicar', 'true');
 
     // Si no se ha configurado previamente, establecer valores por defecto
 
-    if (PropertiesService.getDocumentProperties().getProperty('inicializado') != 'true') {
+    if (PropertiesService.getScriptProperties().getProperty('inicializado') != 'true') {
       ajustesPorDefecto();
     }
 
@@ -280,7 +281,7 @@ function despublicar() {
     },
       slideId, ultimaRevId);
 
-    PropertiesService.getDocumentProperties().setProperty('publicar', 'false');
+    PropertiesService.getScriptProperties().setProperty('publicar', 'false');
     SlidesApp.getUi().alert('🔄 AutoSlides', '🔻 このプレゼンテーションは現在公開されていません。', SlidesApp.getUi().ButtonSet.OK);
 
   } catch (e) {
@@ -299,7 +300,7 @@ function doGet(e) {
 
   // Rellenar elementos de plantilla
 
-  var ajustes = PropertiesService.getDocumentProperties().getProperties();
+  var ajustes = PropertiesService.getScriptProperties().getProperties();
   var aspecto = 100 * SlidesApp.getActivePresentation().getPageHeight() / SlidesApp.getActivePresentation().getPageWidth();
   var offsetPx = ajustes.eliminarBordes == 'on' ? INSET_BORDES : 0;
 

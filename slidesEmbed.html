@@ -1,71 +1,74 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <base target="_top">
-  </head>
-  
-  <body style="background-color:<?= colorFondo ?>; margin: 0; padding: 0;">
-  
+<head>
+  <base target="_top">
+  <style>
+    body {
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body style="background-color:<?= colorFondo ?>; margin: 0; padding: 0;">
+
   <!-- Mostrar presentación incrustada si publicación activada y ajustes inicializados -->
-  
-  <? if (PropertiesService.getDocumentProperties().getProperty('publicar') == 'true' && 
-         PropertiesService.getDocumentProperties().getProperty('initialized') == 'true' ) { ?>
-  
-    <div id="marco1" style="display: block; position: relative; height: 100vh; margin: auto; overflow: hidden; border: none;">
-      <iframe id="marco2" style="transition: opacity 1s; position:absolute; width: 100%; height: 100%; clip-path: inset(<?= insetSuperior ?>px <?= insetLateral ?>px <?= insetInferior ?>px <?= insetLateral ?>px)";
-        src="<?= url ?>?start=<?= iniciar ?>&loop=<?= repetir ?>&delayms=<?= msAvanzar ?>"
-        frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
-      </iframe>
-    </div>
 
-    <div id="marco3" style="display: block; position: relative; height: 100vh; margin: auto; overflow: hidden; border: none;">
-      <iframe id="marco4" style="transition: opacity 1s; position:absolute; width: 100%; height: 100%; clip-path: inset(<?= insetSuperior ?>px <?= insetLateral ?>px <?= insetInferior ?>px <?= insetLateral ?>px)";
-        src=""
-        frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
-      </iframe>
-    </div>
-  
-    <!-- Si intervalo de recarga = 0 no recargaremos nunca -->
-  
-    <? if (PropertiesService.getDocumentProperties().getProperty('sRecargar') != '0') { ?>
+  <? if (PropertiesService.getScriptProperties().getProperty('publicar') == 'true' && 
+         PropertiesService.getScriptProperties().getProperty('initialized') == 'true' ) { ?>
 
-      <script>
+  <div id="marco1" style="position: relative; height: 100vh; margin: auto; overflow: hidden; border: none;">
+    <iframe id="marco2"
+      style="transition: opacity 1s; position:absolute; width: 100%; height: 100%; clip-path: inset(<?= insetSuperior ?>px <?= insetLateral ?>px <?= insetInferior ?>px <?= insetLateral ?>px)"
+      ; src="<?= url ?>?start=<?= iniciar ?>&loop=<?= repetir ?>&delayms=<?= msAvanzar ?>" frameborder="0"
+      allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
+    </iframe>
+  </div>
 
-        let frontFrame = 2; // 手前にあるフレーム
+  <!-- Si intervalo de recarga = 0 no recargaremos nunca -->
+
+  <? if (PropertiesService.getScriptProperties().getProperty('sRecargar') != '0') { ?>
+
+  <script>
+    let frontFrame = 2; // 手前にあるフレーム
   
-        setInterval(async function(){
-          console.log('changed', new Date().toLocaleString());
+    setInterval(reload, <?= msRecargar ?>);
 
-          const backFrame = frontFrame === 2 ? 4 : 2; // 背後にあるフレーム
+    async function reload(){
+      const backFrame = frontFrame === 2 ? 4 : 2; // 背後にあるフレーム
       
-          // document.getElementById(`marco${frontFrame}`).style.opacity = 0;
-      
-          document.getElementById(`marco${backFrame}`).src="<?= url ?>?start=<?= iniciar ?>&loop=<?= repetir ?>&delayms=<?= msAvanzar ?>";
-          // sleep(<?= msFundido ?>).then(() => {document.getElementById(`marco${frontFrame}`).style.opacity = 1;});
-          await sleep(3000);
-          document.getElementById(`marco${backFrame - 1}`).style.display = 'block';
-          document.getElementById(`marco${frontFrame - 1}`).style.display = 'none';
-          document.getElementById(`marco${frontFrame}`).src="";
+      const newElem = document.createElement('div');
+      newElem.setAttribute('id', `marco${backFrame - 1}`);
+      newElem.setAttribute('style', 'position: relative; height: 100vh; margin: auto; overflow: hidden; border: none;');
+      newElem.innerHTML = `
+        <iframe id="marco${backFrame}"
+          style="transition: opacity 1s; position:absolute; width: 100%; height: 100%; clip-path: inset(<?= insetSuperior ?>px <?= insetLateral ?>px <?= insetInferior ?>px <?= insetLateral ?>px)"
+          ; src="<?= url ?>?start=<?= iniciar ?>&loop=<?= repetir ?>&delayms=<?= msAvanzar ?>" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
+        </iframe>
+      `;
+      document.body.appendChild(newElem);
 
-          frontFrame = backFrame;
-           
-        }, <?= msRecargar ?>);
+      await sleep(4500);
+      document.getElementById(`marco${frontFrame - 1}`).remove();
+
+      frontFrame = backFrame;
+        
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
     
-        function sleep(ms) {
-          return new Promise(resolve => setTimeout(resolve, ms));
-        }
-    
-      </script>
-  
-    <? } ?>
-  
-  <? } else {?>
-    
-    <h1>プレゼンテーションが非公開です</h1>
-     
+  </script>
+
   <? } ?>
 
-  </body>
+  <? } else {?>
+
+  <h1>プレゼンテーションが非公開です</h1>
+
+  <? } ?>
+
+</body>
 
 </html>

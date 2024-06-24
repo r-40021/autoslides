@@ -9,8 +9,8 @@ function changeVisible() {
   for (const sheetName of sheetList) {
     const sheet = spreadsheet.getSheetByName(sheetName);
     const data = sheet.getRange(`A2:E${sheet.getLastRow()}`).getValues();
-
-    let previousSlide = data[0][4].split(',');
+    
+    let previousSlide = data[0][4].toString().split(',');
 
     for (const event of data) {
       if (new Date(`${event[0].getFullYear()}/${event[0].getMonth() + 1}/${event[0].getDate()} ${event[2].getHours()}:${event[2].getMinutes()}`).getTime() <= now.getTime()) {
@@ -36,7 +36,7 @@ function changeVisible() {
             PropertiesService.getScriptProperties().setProperty('sRecargar', Number(PropertiesService.getScriptProperties().getProperty('sRecargar')) - Number(PropertiesService.getScriptProperties().getProperty('sAvanzar'))); // リロード間隔を1スライド分減らす
           }
 
-          previousSlide[i] = Number(event[4].split(',')[i]);
+          previousSlide[i] = Number(event[4].toString().split(',')[i]);
         }
       }
     }
